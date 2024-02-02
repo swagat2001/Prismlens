@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../resources/Logo/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrismLens Glass Overlays</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8DwpAXpfwMfPiia8d3FtvSb3Av0sAcfXbVT5H2rdh3cS9s7Ewjrd4IG38KSgsu6dOXoM&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            font-family: "Raleway", sans-serif;
+            font-weight: 300;
+            font-size: 35px;
+            color: #080808;
+            -webkit-transition: all 0.4s ease 0s;
+            -o-transition: all 0.4s ease 0s;
+            transition: all 0.4s ease 0s;
+        }
+
+        h1 span {
+            display: block;
+            font-size: 0.5em;
+            line-height: 1.3;
+        }
+
+        h1 em {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* === HEADING STYLE #4 === */
+        .four h1 {
+            text-align: center;
+            padding-bottom: 0.7em;
+        }
+
+        .four h1 span {
+            font-weight: 300;
+            word-spacing: 3px;
+            line-height: 2em;
+            padding-bottom: 0.35em;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .four h1:before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 1px;
+            content: "";
+            left: 50%;
+            margin-left: -30px;
+            background-color: #777;
+        }
+
+
+        img {
+            border: 5px solid rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 80%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.5s ease, border-radius 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .control-btn:hover {
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        .camera-btn {
+            background: linear-gradient(rgb(14, 95, 14), rgb(0, 255, 102), rgb(0, 255, 102), rgb(14, 95, 14));
+        }
+
+        .frame-btn {
+            background: linear-gradient(rgb(95, 14, 14), rgb(255, 0, 0), rgb(255, 0, 0), rgb(95, 14, 14));
+        }
+
+        .bttn-1 {
+            background: linear-gradient(rgb(14, 95, 14), rgb(0, 255, 102), rgb(0, 255, 102), rgb(14, 95, 14));
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>PrismLens Glass Overlays</h1> -->
+    <div class="four">
+        <h1><span>Choose Frames with help of AI</span> The<em> PrismLens</em> Overlays</h1>
+    </div>
+    <img src="{{ url_for('video_feed') }}" alt="PrismLens Glass Overlays">
+    <div class="button-container">
+        <button class="control-btn camera-btn" onclick="toggleCamera()">Toggle Camera</button>
+        <!-- <button class="control-btn frame-btn" onclick="selectFrame()">Select Frame</button> -->
+        <a href="http://localhost:8081/Primlens/Buypage.jsp"><button class="control-btn frame-btn">Select Frame</button></a>
+    </div>
+    <button class="control-btn bttn-1" onclick="changeGlasses()">Change Glasses</button>
+
+    <script>
+        function toggleCamera() {
+            // Send a request to the server to toggle the camera
+            console.log('Toggle Camera not working');
+            // Uncomment the fetch code below when you have the server-side logic in place
+            // fetch('/toggle_camera')
+            //     .then(response => response.text())
+            //     .then(message => console.log(message))
+            //     .catch(error => console.error('Error:', error));
+        }
+
+        // function selectFrame() {
+        //     // Send a request to the server to select a different frame
+        //     fetch('/select_frame')
+        //         .then(response => response.text())
+        //         .then(message => console.log(message))
+        //         .catch(error => console.error('Error:', error));
+        // }
+
+        function changeGlasses() {
+            // Send a request to the server to change the glasses
+            fetch('/change_glasses')
+                .then(response => response.text())
+                .then(message => console.log(message))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+
+</html>

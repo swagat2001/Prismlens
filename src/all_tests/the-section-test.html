@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Recognition Quiz</title>
+    <style>
+        #image-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 50px auto;
+            overflow: hidden;
+            border-radius: 50%;
+            border: 2px solid #000;
+        }
+
+        .section {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 0 0, 100% 0);
+            cursor: pointer;
+            transform-origin: 50% 50%;
+        }
+
+        .section:nth-child(8) {
+            transform: rotate(0deg);
+        }
+
+        .section:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .section:nth-child(2) {
+            transform: rotate(90deg);
+        }
+
+        .section:nth-child(3) {
+            transform: rotate(135deg);
+        }
+
+        .section:nth-child(4) {
+            transform: rotate(180deg);
+        }
+
+        .section:nth-child(5) {
+            transform: rotate(225deg);
+        }
+
+        .section:nth-child(6) {
+            transform: rotate(270deg);
+        }
+
+        .section:nth-child(7) {
+            transform: rotate(315deg);
+        }
+
+        .line {
+            position: absolute;
+            width: 2px;
+            height: 50%;
+            background-color: #000;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #score {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #correct-section {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        #wrong-clicks {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="image-container">
+        <div class="section" data-section="1">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="2">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="3">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="4">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="5">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="6">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="7">
+            <div class="line"></div>
+        </div>
+        <div class="section" data-section="8">
+            <div class="line"></div>
+        </div>
+        <img id="quiz-image" src="./image1.jpg" alt="Quiz Image">
+    </div>
+
+    <div id="score">Score: 0</div>
+    <div id="correct-section">Correct Section: 1</div>
+    <div id="wrong-clicks">Wrong Clicks: 0</div>
+
+    <script>
+        let currentImageIndex = 0;
+        let score = 0;
+        let wrongClicks = 0;
+        const quizOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+        const quizData = {
+            1: { image: './image1.jpg', correctSection: '1' },
+            2: { image: './image2.jpg', correctSection: '2' },
+            3: { image: './image3.jpg', correctSection: '3' },
+            4: { image: './image1.jpg', correctSection: '4' },
+            5: { image: './image2.jpg', correctSection: '5' },
+            6: { image: './image3.jpg', correctSection: '6' },
+            7: { image: './image3.jpg', correctSection: '7' },
+            8: { image: './image1.jpg', correctSection: '8' },
+            9: { image: './image2.jpg', correctSection: '1' },
+            10: { image: './image3.jpg', correctSection: '2' },
+            11: { image: './image1.jpg', correctSection: '3' },
+            12: { image: './image2.jpg', correctSection: '4' },
+            13: { image: './image3.jpg', correctSection: '5' },
+            14: { image: './image1.jpg', correctSection: '6' },
+            15: { image: './image2.jpg', correctSection: '7' },
+            16: { image: './image3.jpg', correctSection: '8' },
+            17: { image: './image3.jpg', correctSection: '1' },
+            18: { image: './image1.jpg', correctSection: '2' },
+            19: { image: './image2.jpg', correctSection: '3' },
+            20: { image: './image3.jpg', correctSection: '4' },
+        };
+
+        const sections = document.querySelectorAll('.section');
+        const quizImage = document.getElementById('quiz-image');
+        const scoreElement = document.getElementById('score');
+        const correctSectionElement = document.getElementById('correct-section');
+        const wrongClicksElement = document.getElementById('wrong-clicks');
+
+        resetQuiz(); // Call the function to set initial values
+
+        sections.forEach(section => {
+            section.addEventListener('click', () => {
+                const selectedSection = section.getAttribute('data-section');
+                const currentQuizData = quizData[quizOrder[currentImageIndex]];
+                if (selectedSection === currentQuizData.correctSection) {
+                    score++;
+                    updateScore();
+                } else {
+                    wrongClicks++;
+                    updateWrongClicks();
+                }
+                showNextImage();
+            });
+        });
+
+        function showNextImage() {
+            currentImageIndex++;
+            if (currentImageIndex < quizOrder.length) {
+                const currentQuizData = quizData[quizOrder[currentImageIndex]];
+                quizImage.src = currentQuizData.image;
+                resetSections();
+                updateCorrectSection(currentQuizData.correctSection);
+            } else {
+                setTimeout(() => {
+                    alert('Quiz completed! Your score: ' + score);
+                    resetQuiz();
+                }, 500); // Delay the alert to let the user see the last result
+            }
+        }
+
+        function resetSections() {
+            sections.forEach(section => {
+                section.style.display = 'block';
+            });
+        }
+
+        function resetQuiz() {
+            currentImageIndex = 0;
+            score = 0;
+            wrongClicks = 0;
+            const currentQuizData = quizData[quizOrder[currentImageIndex]];
+            quizImage.src = currentQuizData.image;
+            resetSections();
+            updateScore();
+            updateCorrectSection(currentQuizData.correctSection);
+            updateWrongClicks();
+        }
+
+        function updateScore() {
+            scoreElement.textContent = 'Score: ' + score;
+        }
+
+        function updateCorrectSection(correctSection) {
+            correctSectionElement.textContent = 'Correct Section: ' + correctSection;
+        }
+
+        function updateWrongClicks() {
+            wrongClicksElement.textContent = 'Wrong Clicks: ' + wrongClicks;
+        }
+    </script>
+</body>
+
+</html>

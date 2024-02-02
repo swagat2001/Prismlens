@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../resources/Logo/favicon-32x32.png" />
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .slider-container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .slider-img {
+            width: 60%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slider-text {
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-size: x-large;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            width: 100%;
+            flex: 0 0 auto;
+            background-color: #f8f9fa;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-73 {
+            appearance: none;
+            background-color: #FFFFFF;
+            border-radius: 40em;
+            border-style: none;
+            box-shadow: #ADCFFF 0 -12px 6px inset;
+            box-sizing: border-box;
+            color: #000000;
+            cursor: pointer;
+            display: inline-block;
+            font-family: -apple-system, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -.24px;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.3rem;
+            quotes: auto;
+            text-align: center;
+            text-decoration: none;
+            transition: all .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        .button-73:hover {
+            background-color: #3cda03;
+            box-shadow: #86ff14 0 -6px 8px inset;
+            transform: scale(1.125);
+        }
+
+        .button-73:active {
+            transform: scale(1.025);
+        }
+
+        @media (min-width: 768px) {
+            .button-73 {
+                font-size: 1.5rem;
+                padding: .75rem 2rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <title>ColorBlindnessTest PrismLens</title>
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Welcome to our Online Vision Screening, designed to offer an initial assessment of your vision. It's
+                essential to note that this screening is not a medical test and should not replace professional eye
+                care. It
+                does not diagnose or address diseases. The purpose is to provide a general understanding of your visual
+                acuity, suggesting whether a comprehensive eye exam with a trained professional is advisable. We
+                recommend
+                regular eye check-ups every two years, or sooner if you observe changes in your vision. Please be aware
+                that
+                Carl Zeiss Vision Inc. and other Carl Zeiss Group companies assume no responsibility for damages or
+                consequences resulting from the Online Vision Screening or the provided information.</p>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div id="colorblind-slider" class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="../all_tests/img/red-green color blind test/test1-4.jpg" class="slider-img" alt="Slide 1">
+                    <div class="carousel-caption">
+                        <p class="slider-text">1. Click on the gap between the ring!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../all_tests/img/red-green color blind test/test2-4.jpg" class="slider-img" alt="Slide 2">
+                    <div class="carousel-caption">
+                        <p class="slider-text">2. Continue the test until the diagnosis appears!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../all_tests/img/red-green color blind test/test3-4.jpg" class="slider-img" alt="Slide 3">
+                    <div class="carousel-caption">
+                        <p class="slider-text">3. There are 8 possible directions or gaps!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="../all_tests/img/red-green color blind test/test4-4.jpg" class="slider-img" alt="Slide 4">
+                    <div class="carousel-caption">
+                        <p class="slider-text">4. The test takes about 1-3 minutes only!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+        </div>
+        <div class="button-container">
+            <button id="agreeButton" class="button-73" role="button" onclick="toggleAgree()">Terms and
+                Conditions</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelector('.carousel-inner');
+
+        function showSlide() {
+            const slideWidth = slides.clientWidth;
+            slides.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.children.length) % slides.children.length;
+            showSlide();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.children.length;
+            showSlide();
+        }
+
+        setInterval(nextSlide, 5000);
+
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function toggleAgree() {
+            const button = document.getElementById('agreeButton');
+            const buttonText = button.innerText;
+
+            if (buttonText === 'Terms and Conditions') {
+                openModal();
+                button.innerText = 'I Agree';
+            } else if (buttonText === 'I Agree') {
+                window.open('colorgap-test.html', '_blank');
+            }
+        }
+    </script>
+</body>
+
+</html>
