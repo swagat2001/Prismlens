@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/Logo/favicon-32x32.png" />
+    <!-- styesheet css -->
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/ddac256733.js" crossorigin="anonymous"></script>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- icon link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <!-- chatbot -->
+    <link rel="stylesheet" href="src/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>PrismLens</title>
+</head>
+<script>
+        // Get the query parameter from the URL
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return null;
+        }
+
+        // Show alert if the "loginSuccess" parameter is present in the URL
+        var loginSuccess = getQueryVariable("loginSuccess");
+        if (loginSuccess === "true") {
+            alert("Login successful!");
+        }
+    </script>
+<body>
+    <!-- ----- navbar started ----- -->
+    
+    <div class="main-div">
+        <!-- first part -->
+        <div id="header" class="header">
+            <div class="start">
+                <img src="./resources/Logo/PrismLensLogo.png" class="logo" />
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="What are you looking for .....">
+                <i class="fa-solid fa-magnifying-glass fa-sm" id="search-icon"></i>
+                <!-- <i class="fa-solid fa-microphone-slash fa-sm" id="mic-icon"></i> -->
+            </div>
+            <div class="end">
+                <nav>
+                    <ul id="card">
+                        <li class="btnhover" onclick="togglePopupsignup()" id="largescreen">
+                            Logout<span></span><span></span><span></span><span></span>
+                        </li>
+                        <div class="overlaysignup" onclick="togglePopupsignup()"></div>
+                        <div id="signup-popup">
+                            <div id="signup-form">
+                                <!-- <h2>Logout</h2> -->
+                                <form action="logout.jsp" method="post">
+                                    <h2>LOGOUT?</h2>
+                                    <button type="submit">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                        <i class="fas fa-times" id="stop" onclick="closemenu()"></i>
+                        <li class="btnhover" onclick="trackorder()" id="largescreen">
+                            <a href='ordered.jsp'>Order</a><span></span><span></span><span></span><span></span>
+                        </li>
+                        <li class="btnhover" onclick="" id="largescreen">
+                            wishlist<span></span><span></span><span></span><span></span>
+                        </li>
+                        <li class="btnhover" onclick="" id="largescreen">
+                            <a href="cartview.jsp">Cart</a><span></span><span></span><span></span><span></span>
+                        </li>
+                        <!-- responsive part right side navbar -->
+                        <li class="sidemenu">
+                            <button class="btn btn5" onclick="togglePopupsignup()">
+                                Logout
+                            </button>
+                        </li>
+                        <li class="sidemenu"><a href='ordered.jsp'>Order</a></li>
+                        <li class="sidemenu">
+                            <i class="fa-regular fa-heart fa-2xs"></i><a href="#wishlist"> Wishlist</a>
+                        </li>
+                        <li class="sidemenu">
+                            <i class="fa-solid fa-cart-shopping fa-2xs"></i><a href="cartview.jsp"> Cart</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#notification">Manage Notification</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#contactus">Contact Us</a>
+                        </li>
+                        <!-- shop now -->
+                        <p class="sidemenu" id="shopnow">SHOP NOW</p>
+                        <li class="sidemenu">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    onclick="toggle(this)">Mens</button>
+                                <div class="dropdown-menu" id="dropmenu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">EYEGLASSES</a>
+                                    <a class="dropdown-item" href="#">COMPUTER GLASSES</a>
+                                    <a class="dropdown-item" href="#">SUN GLASSES</a>
+                                    <a class="dropdown-item" href="#">CONTACT LENSES</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="sidemenu">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    onclick="toggle(this)">Kids</button>
+                                <div class="dropdown-menu" id="dropmenu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">EYEGLASSES</a>
+                                    <a class="dropdown-item" href="#">COMPUTER GLASSES</a>
+                                    <a class="dropdown-item" href="#">SUN GLASSES</a>
+                                    <a class="dropdown-item" href="#">CONTACT LENSES</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="sidemenu">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    onclick="toggle(this)">women</button>
+                                <div class="dropdown-menu" id="dropmenu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">EYEGLASSES</a>
+                                    <a class="dropdown-item" href="#">COMPUTER GLASSES</a>
+                                    <a class="dropdown-item" href="#">SUN GLASSES</a>
+                                    <a class="dropdown-item" href="#">CONTACT LENSES</a>
+                                </div>
+                            </div>
+                        </li>
+                        <p class="sidemenu" id="services">OUR SERVICES</p>
+                        <li class="sidemenu">
+                            <a href="./src/all_tests/main-test-page.html">Free Home Trail</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#homeeyecheckup">Home Eye Check-Up</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#Storelocator">Store Locator</a>
+                        </li>
+                        <p class="sidemenu" id="highlights">HIGHLIGHTS</p>
+                        <li class="sidemenu">
+                            <a href="#Checkframesize">Check Frame Size</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#goldmembership">Gold Membership</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="http://127.0.0.1:5000/">Try Frames in 3D</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#downloadapps">Download Apps</a>
+                        </li>
+                        <p class="sidemenu" id="faq">FAQ's & POLICIES</p>
+                        <li class="sidemenu">
+                            <a href="#frequently">Frequently Asked Questions</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#cancellation">Cancellation & Return Policy</a>
+                        </li>
+                        <li class="sidemenu">
+                            <a href="#cobrowsing">Cobrowsing</a>
+                        </li>
+                    </ul>
+                    <i class="fas fa-bars" id="start" onclick="openmenu()"></i>
+                </nav>
+            </div>
+        </div>
+
+        <!-- second part -->
+        <div id="leftright" class="leftright">
+            <div class="left">
+                <ul>
+                    <li><a href="#">EYE GLASSES</a></li>
+                    <li><a href="#">COMPUTER GLASSES</a></li>
+                    <li><a href="#">KIDS GLASSES</a></li>
+                    <li><a href="#">CONTACT LENSES</a></li>
+                    <li><a href="#">SUN GLASSES</a></li>
+                    <li><a href="./src/all_tests/main-test-page.html">HOME EYE-TEST</a></li>
+                    <li><a href="#">STORE LOCATOR</a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <a href="http://127.0.0.1:5000/" ><button class="btn btn1" id="firstbtn">3D
+                        TRY</button></a>
+                <button class="btn btn2" id="secondbtn">BLU</button>
+                <button class="btn btn3" id="thirdbtn">GOLD</button>
+            </div>
+        </div>
+
+        <!-- third part -->
+        <div class="navlast">
+            <div class="glassimage">
+                <ul>
+                    <img src="./resources/glass/eye glass.jpg" class="photo" />
+                    <img src="./resources/glass/sun glass.jpg" class="photo" />
+                    <img src="./resources/glass/computer glass.jpg" class="photo" />
+                    <img src="./resources/glass/contact lenses.jpg" class="photo" />
+                    <img src="./resources/glass/power glass.jpg" class="photo" />
+                    <img src="./resources/glass/progressive lenses.jpg" class="photo" />
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- ----- navbar ended ----- -->
+
+    <!-- CHATBOT STARTED -->
+    <div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">Chat with us!
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <!-- Messages -->
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+
+                        <!-- User input box -->
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="Tap 'Enter' to send a message">
+                                <p></p>
+                            </div>
+
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
+                                    onclick="heartButton()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CHATBOT  ENDED-->
+
+
+    <!-- slider section started by tushar -->
+    <div class="slider-body">
+        <div class="top">
+            <div><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/nov23/eyeconic/Home-Web-hero-banner.gif" alt="">
+            </div>
+        </div>
+
+        <div class="slider-container">
+
+        </div>
+        <div class="slider">
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/oct23/web/artisinal.jpg" alt="img"></div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/oct23/web/maverick.gif" alt="img"></div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/sep22/nature-pro/web.jpg" alt="img"></div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/Dec22/new-collection/desktop.gif" alt="img">
+            </div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/Nov22/LK-Airflex-desktop-banner.gif" alt="img">
+            </div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/oct9/Electro-punk/web.gif" alt="img"></div>
+            <div class="slide"><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/oct9/holiday-edit/Desktop.jpg" alt="img">
+            </div>
+        </div>
+        <!-- <div class="arrow left" onclick="prevSlide()">&#9665;</div>
+    <div class="arrow right" onclick="nextSlide()">&#9655;</div> -->
+    </div>
+
+    <div class="bottom">
+        <div><img class="img-slider" src="https://static1.lenskart.com/media/desktop/img/Apr22/Bannerforexport.jpg"
+                alt="">
+        </div>
+    </div>
+    <div class="ttttx">
+        <center>
+            <h3 class="ttx">WEAR THE TREND</h3>
+        </center>
+        <div class="lower">
+            <div class="l1">
+                <div class="glass-box"><img class="img-slider"
+                        src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png" alt=""></div>
+                <div class="l2"><button class="bttn-1" onclick="openPopup()">Explore</button></div>
+            </div>
+            <div class="l1">
+                <div class="glass-box"><img class="img-slider"
+                        src="https://static1.lenskart.com/media/desktop/img/Sep21/trans.jpg" alt=""></div>
+                <div class="l2"><button class="bttn-1" onclick="openPopup()">Explore</button></div>
+            </div>
+            <div class="l1">
+                <div class="glass-box"><img class="img-slider"
+                        src="https://static1.lenskart.com/media/desktop/img/Sep21/clubmaster.jpg" alt=""></div>
+                <div class="l2"><button class="bttn-1" onclick="openPopup()">Explore</button></div>
+            </div>
+            <div class="l1">
+                <div class="glass-box"><img class="img-slider"
+                        src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg" alt=""></div>
+                <div class="l2"><button class="bttn-1" onclick="openPopup()">Explore</button></div>
+            </div>
+        </div>
+
+        
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">PREMIUM EYEWEAR</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/oct23/home/13-10-23/As%20seen%20on%20Desk.jpg"
+                    alt=""></div>
+        </div>
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">AS SEEN ON MOUNI ROY</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider" src="https://static1.lenskart.com/media/desktop/img/23may/cannes/web.gif"
+                    alt=""></div>
+        </div>
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">AS SEEN ON SHARK TANK</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/Dec22/1-Dec/Homepage-Banner-web.gif" alt="">
+            </div>
+        </div>
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">AS SEEN ON KARAN JOHAR</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider" src="https://static1.lenskart.com/media/desktop/img/Dec22/Web_banner.gif"
+                    alt=""></div>
+        </div>
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">TRENDING SUNGLASSES</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/Jan23/sunglasses/Sun-Banner-web.gif" alt="">
+            </div>
+        </div>
+
+        <div class="middle-lower">
+            <div class="ttttx">
+                <center>
+                    <h3 class="ttx">AQUACOLOR - GLAM UP WITH COLOR LENSES</h3>
+                </center>
+            </div>
+
+            <div><img class="img-slider"
+                    src="https://static1.lenskart.com/media/desktop/img/Oct22/kiara/Refresh-Banner-Web.gif" alt="">
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <!-- slider section ended -->
+
+    <!-- youtube slider and promotions by rajiv started-->
+    <div class="video-container">
+        <div class="video-box">
+            <iframe width="440" height="300" src="https://www.youtube.com/embed/HYPqf_eVvvM" title="Customer Reviews"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-box">
+            <iframe width="440" height="300" src="https://www.youtube.com/embed/SQm3RxXRunw"
+                title="Lenskart Customer Testimonial" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <div class="video-box">
+            <iframe width="440" height="300" src="https://www.youtube.com/embed/IZpUQ-S_LcM"
+                title="Lenskart - The Customer Diaries - Anurag" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+    <!-- youtube slider and promotions by rajiv ended -->
+
+    <!-- footer section started -->
+
+    <footer id="dk-footer" class="dk-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
+                    <div class="dk-footer-box-info">
+                        <a href="index.html" class="footer-logo">
+                            <img src="./resources/Logo/PrismLensLogo.png" alt="footer_logo" class="img-fluid">
+                        </a>
+                        <p class="footer-info-text">
+                            Where color meets clarity! Unleash a spectrum of personalized solutions for color vision
+                            needs, blending innovation with
+                            accessibility in every pixel.
+                        </p>
+                        <div class="footer-social-link">
+                            <h3>Follow us</h3>
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Social link -->
+                    </div>
+                    <!-- End Footer info -->
+                    <!-- <div class="footer-awarad">
+                        <img src="images/icon/best.png" alt="">
+                        <p>Best Design Company 2019</p>
+                    </div> -->
+                </div>
+                <!-- End Col -->
+                <div class="col-md-12 col-lg-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-us">
+                                <div class="contact-icon">
+                                    <i class="fa fa-map-o" aria-hidden="true"></i>
+                                </div>
+                                <!-- End contact Icon -->
+                                <div class="contact-info">
+                                    <h3>Bhubneshwar, Odisha</h3>
+                                    <p>Silicon Institute of Technology - 751024</p>
+                                </div>
+                                <!-- End Contact Info -->
+                            </div>
+                            <!-- End Contact Us -->
+                        </div>
+                        <!-- End Col -->
+                        <div class="col-md-6">
+                            <div class="contact-us contact-us-last">
+                                <div class="contact-icon">
+                                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                                </div>
+                                <!-- End contact Icon -->
+                                <div class="contact-info">
+                                    <h3>+91 1244216969</h3>
+                                    <p>Give us a call</p>
+                                </div>
+                                <!-- End Contact Info -->
+                            </div>
+                            <!-- End Contact Us -->
+                        </div>
+                        <!-- End Col -->
+                    </div>
+                    <!-- End Contact Row -->
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6">
+                            <div class="footer-widget footer-left-widget">
+                                <div class="section-heading">
+                                    <h3>Useful Links</h3>
+                                    <span class="animate-border border-black"></span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <a href="#">About us</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Help</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Our Team</a>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <a href="#">Contact us</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Testimonials</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Faq</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Footer Widget -->
+                        </div>
+                        <!-- End col -->
+                        <div class="col-md-12 col-lg-6">
+                            <div class="footer-widget">
+                                <div class="section-heading">
+                                    <h3>Subscribe</h3>
+                                    <span class="animate-border border-black"></span>
+                                </div>
+                                <p>
+                                    Subscribe now for a technicolor journey,
+                                    blending cutting-edge solutions, education, and a splash of fun for a more colorful
+                                    tomorrow!</p>
+                                <form action="#">
+                                    <div class="form-row">
+                                        <div class="col dk-footer-form">
+                                            <input type="email" class="form-control" placeholder="Email Address">
+                                            <button type="submit">
+                                                <i class="fa fa-send"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- End form -->
+                            </div>
+                            <!-- End footer widget -->
+                        </div>
+                        <!-- End Col -->
+                    </div>
+                    <!-- End Row -->
+                </div>
+                <!-- End Col -->
+            </div>
+            <!-- End Widget Row -->
+        </div>
+        <!-- End Contact Container -->
+
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>Copyright © 2024, All Right Reserved by PrismLens</span>
+                    </div>
+                    <!-- End Col -->
+                    <div class="col-md-6">
+                        <div class="copyright-menu">
+                            <ul>
+                                <li>
+                                    <a href="#">Home</a>
+                                </li>
+                                <li>
+                                    <a href="#">Terms and Conditions</a>
+                                </li>
+                                <li>
+                                    <a href="#">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End col -->
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Copyright Container -->
+        </div>
+
+            <!-- Popup container -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        
+        <!-- Close button -->
+        <div class="close-button-round-x">
+        <span class="close-button" onclick="closePopup()">&times;</span>
+        </div>
+        <!-- Popup content -->
+        <h3>Here is our product</h3>
+        <p class="p-discription">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ut libero eveniet natus quidem, itaque mollitia veritatis corporis, dolorem, facilis sint! Nemo, ducimus sed illum totam amet nulla minima ratione ullam non necessitatibus error harum numquam maiores illo laudantium soluta inventore odit dolore optio eligendi minus blanditiis, excepturi earum ad.
+        </p>
+        <button onclick="addToCart()" class="bttn-1" id="add-to-cart-left">Add to Cart</button>
+        <a href="Buypage.jsp" ><button class="bttn-1" id="buy-button-right">Buy Now</button></a>
+ 
+    </div>
+    <!-- Pop up container End-->
+
+
+        <!-- End Copyright -->
+        <!-- Back to top -->
+        <div id="back-to-top" class="back-to-top">
+            <button class="btn btn-dark" title="Back to Top" style="display: block;">
+                <i class="fa fa-angle-up"></i>
+            </button>
+        </div>
+        <!-- End Back to top -->
+    </footer>
+
+    <!-- footer section ended -->
+    <script src="./src/js/script.js"></script>
+    <!-- chatbot -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="src/js/chat.js"></script>
+    <!-- bootstrap js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+</html>
