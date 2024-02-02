@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Slider</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+
+        #slider-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .slide:hover img {
+            filter: none;
+        }
+
+        .filter1 img {
+            filter: gr(150%);
+        }
+
+        .filter2 img {
+            filter: blur(5px);
+        }
+
+        .filter3 img {
+            filter: none;
+        }
+
+        .test-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .test-button:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="slider-container">
+        <div class="slider">
+            <div class="slide filter1">
+                <img src="image1.jpg" alt="Image 1">
+            </div>
+            <div class="slide filter2">
+                <img src="image2.jpg" alt="Image 2">
+            </div>
+            <div class="slide filter3">
+                <img src="image3.jpg" alt="Image 3">
+            </div>
+        </div>
+    </div>
+
+    <button class="test-button">Test Button</button>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            const container = document.querySelector('.slider');
+            container.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+
+</body>
+
+</html>

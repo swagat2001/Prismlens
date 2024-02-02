@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #3498db;
+        }
+
+        .row-col-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .column {
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .e-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+        }
+
+        .eye-row {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .eye-row img {
+            margin: 0 10px;
+            max-width: 40px;
+            height: auto;
+        }
+
+        .text {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .score {
+            font-weight: bold;
+            font-size: 20px;
+            color: #3498db;
+        }
+    </style>
+    <title>Visual Acuity Test</title>
+</head>
+
+<body>
+    <div class="container" id="app"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const appElement = document.getElementById('app');
+            let randomImage = "./images/E_left.jpg";
+            let tumblingEValue = "left";
+            let eWidth = 40;
+            let eHeight = 40;
+            let counter = 0;
+            let score = 0;
+
+            const createVisualAcuityTest = () => {
+                const visualAcuityTest = document.createElement('div');
+                visualAcuityTest.innerHTML = `
+          <main>
+            <h2 class="page-title">Test your visual acuity</h2>
+            <div class="row-col-layout">
+              <div class="column">
+                <button type="button" name="up" onclick="clickedArrow(event)">Up</button>
+                <div class="row">
+                  <button type="button" name="left" onclick="clickedArrow(event)">Left</button>
+                  <img class="e-img" src="${randomImage}" alt="tumbling E" value="${tumblingEValue}">
+                  <button type="button" name="right" onclick="clickedArrow(event)">Right</button>
+                </div>
+                <button type="button" name="down" onclick="clickedArrow(event)">Down</button>
+              </div>
+              <div class="column">
+                <div class="eye-row">
+                  <img src="./images/eye-open-64.png" alt="eye open">
+                  <img src="./images/eye-hidden-64.png" alt="eye hidden">
+                </div>
+                <div class="text">
+                  <p>Keep both eyes open and cover the left eye.</p>
+                  <p>Focus on the E symbol.</p>
+                  <p>Click the arrow keys to rotate and decrease the size of the E symbol.</p>
+                  <p>Score: <span id="score" class="score">${score}</span></p>
+                </div>
+              </div>
+            </div>
+          </main>
+        `;
+                appElement.appendChild(visualAcuityTest);
+                updateESize();
+            };
+
+            window.clickedArrow = (event) => {
+                event.preventDefault();
+                const direction = event.currentTarget.name;
+
+                rotateAndResizeE(direction);
+
+                const isCorrect = checkCorrectPosition(direction);
+                if (isCorrect) {
+                    score++;
+                    document.getElementById('score').textContent = score;
+                    console.log("Correct position! Score: ", score);
+                } else {
+                    console.log("Incorrect position. No score.");
+                }
+
+                counter++;
+                if (counter >= 4) {
+                    counter = 0;
+                    score = 0;
+                    document.getElementById('score').textContent = score;
+                    console.log("Test completed!");
+                }
+            };
+
+            const rotateAndResizeE = (direction) => {
+                let rotation = 0;
+
+                switch (direction) {
+                    case "up":
+                        rotation = 0;
+                        break;
+                    case "left":
+                        rotation = -90;
+                        break;
+                    case "right":
+                        rotation = 90;
+                        break;
+                    case "down":
+                        rotation = 180;
+                        break;
+                    default:
+                        break;
+                }
+
+                eHeight = Math.round(eHeight * 0.8);
+                eWidth = Math.round(eWidth * 0.8);
+
+                document.querySelector(".e-img").style.transform = `rotate(${rotation}deg)`;
+                document.querySelector(".e-img").style.width = eWidth + "px";
+                document.querySelector(".e-img").style.height = eHeight + "px";
+            };
+
+            const checkCorrectPosition = (direction) => {
+                let newDirection = tumblingEValue;
+
+                switch (direction) {
+                    case "up":
+                        newDirection = "up";
+                        break;
+                    case "left":
+                        newDirection = "left";
+                        break;
+                    case "right":
+                        newDirection = "right";
+                        break;
+                    case "down":
+                        newDirection = "down";
+                        break;
+                    default:
+                        break;
+                }
+
+                return direction === newDirection;
+            };
+
+            const updateESize = () => {
+                document.querySelector(".e-img").style.height = eHeight + "px";
+                document.querySelector(".e-img").style.width = eWidth + "px";
+            };
+
+            // Initial load
+            createVisualAcuityTest();
+        });
+    </script>
+</body>
+
+</html>

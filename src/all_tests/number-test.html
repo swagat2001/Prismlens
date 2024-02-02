@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../resources/Logo/favicon-32x32.png" />
+	<head>
+		<meta charset="UTF-8" />
+		<title>Number Test</title>
+		<link rel="stylesheet" href="css/number-test.css" />
+		<script type="text/javascript" src="js/kLib.js"></script>
+	</head>
+	
+	<body>
+		<div id="main">
+			<h1>ISHIHARA TEST</h1>
+			<img src="imgs/test.jpg" id="image" />
+			<br />
+			<br />
+			<br />
+			<!-- <input type="button" value="NEXT" id="button" /> -->
+			<input type="text" value="" id="input" placeholder="Enter Number ..."/>
+			<input type="button" value="SUBMIT" id="show" />
+			<div class="button-container">
+				<button id="agreeButton" class="button-73" role="button" onclick="skip_page()">SKIP TEST</button>
+			</div>
+		</div>
+		<div id="answer">
+			CORRECT NUMBER :
+			<span id="rightAnswer"></span>
+			<br /><br />
+			USER NUMBER :
+			<span id="userAnswer"></span>
+			<br /><br />
+			Total :
+			<span id="noGood"></span> / <span id="noTotal"></span> (<span id="noPercent"></span>%)
+		</div>
+		<script type="text/javascript" src="js/number-test.js"></script>
+	</body>
+</html>

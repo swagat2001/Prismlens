@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../resources/Logo/favicon-32x32.png" />
+  <!-- <link rel="stylesheet" href="instruction.css"> -->
+  <title>ColorBlindnessTest PrismLens</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f4;
+    }
+
+    .modal {
+      display: block;
+      left: 0;
+      top: 0;
+      background-color: #ecf0f4;
+    }
+
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 40px;
+      font-weight: bold;
+      margin-top: -30px;
+      margin-right: 20px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .slider-container {
+      width: 80%;
+      margin: auto;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #ecf0f4;
+    }
+
+    .slider-img {
+      height: 50%;
+      width: 30%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: opacity 0.5s ease-in-out;
+      background-color: #ecf0f4;
+      color: #ecf0f4;
+    }
+
+    .slider-text {
+      font-size: 20px;
+      margin-bottom: 30px;
+      font-size: x-large;
+      background-color: #ecf0f4;
+    }
+
+    #inst1 {
+      height: auto;
+      width: 30%;
+    }
+
+    .range-slider {
+      position: relative;
+      top: 130px;
+      right: 250px;
+    }
+
+    .input-range {
+      writing-mode: bt-lr;
+      -webkit-appearance: slider-vertical;
+      width: 150px;
+      height: 75px;
+      transform: rotate(0deg);
+    }
+
+    .rectangle {
+      margin-top: 50px;
+      margin-left: 500px;
+      margin-bottom: 0px;
+      width: 100px;
+      height: 30px;
+      top: 200px;
+      border: 2px solid grey;
+      border-style: dotted;
+      border-radius: 10px;
+      padding: 3%;
+    }
+
+    .textrectangle {
+      display: none;
+    }
+
+    #inst3,
+    #inst4,
+    #inst5,
+    #inst6 {
+      height: auto;
+      width: 50%;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      background-color: #ecf0f4;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      background-color: #ecf0f4;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-item {
+      width: 100%;
+      flex: 0 0 auto;
+      background-color: #ecf0f4;
+    }
+
+    .decision {
+      display: none;
+    }
+
+    .decision-content {
+      text-align: center;
+      margin-top: 12%;
+      font-size: 24px;
+    }
+
+    /* button-*/
+    .button-container .button-contain {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .button-74 {
+      appearance: none;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: inline-block;
+      font-family: -apple-system, sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.24px;
+      margin: 0;
+      outline: none;
+      padding: 1rem 1.3rem;
+      quotes: auto;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.15s;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-74.zero {
+      width: 15%;
+      color: #0778e9;
+      background-color: #ecf0f4;
+      border-style: block;
+      border-color: #0778e9;
+      border-radius: 10px;
+    }
+
+    .button-74.first {
+      color: rgb(68, 118, 135);
+      background-color: #ecf0f4;
+      font-weight: 5000;
+      border-style: block;
+      border-color: #0778e9;
+      width: 35%;
+    }
+
+    .button-74.second {
+      border-style: none;
+      margin-top: 10px;
+      color: #ffffff;
+      background-color: rgb(19, 109, 139);
+      width: 35%;
+    }
+
+    .button-74:hover {
+      background-color: rgb(4, 120, 114);
+    }
+
+    .button-74.zero:hover {
+      color: white;
+    }
+
+    .button-74.first:hover {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closemyModal()">&times;</span>
+    </div>
+    <div class="slider-container">
+      <div id="colorblind-slider" class="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item">
+            <img src="../all_tests/img/instruction-img/instruction1.jpg" class="slider-img" id="inst1" alt="Slide 1" />
+            <div class="carousel-caption">
+              <p class="slider-text">
+                In your device setting,<br /><b>
+                  turn your screen brightness all the way up <br /></b>for the most accurate results.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="range-slider">
+              <input class="input-range" id="range" orient="vertical" type="range" step="0.5" value="0.5" min="1"
+                max="100" />
+            </div>
+            <div class="rectangle">
+              <p class="textrectangle">
+                Any standard ID, credit or bank card will do This adjusts your
+                screen size fr our check Don't worry, this screening is free.
+                We won't collect any info here.
+              </p>
+            </div>
+            <div class="carousel-caption" id="textinst2">
+              <p class="slider-text">
+                <b>To adjust the screen size,</b><br />place a card on the
+                frame and use the slider to line them up.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../all_tests/img/instruction-img/instruction3.jpg" class="slider-img" id="inst3" alt="Slide 3" />
+            <div class="carousel-caption">
+              <p class="slider-text">
+                <b>Be prepared.</b><br />Wear your glasses or contacts<br />(if
+                you have any).
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../all_tests/img/instruction-img/instruction4.jpg" class="slider-img" id="inst4" alt="Slide 4" />
+            <div class="carousel-caption">
+              <p class="slider-text">
+                <b>Eyes ready?</b><br />Cover your left eye.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../all_tests/img/instruction-img/instruction5.jpg" class="slider-img" id="inst5" alt="Slide 5" />
+            <div class="carousel-caption">
+              <p class="slider-text">
+                <b>Keep away.</b><br />Keep your device at arm's length during
+                the check.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="../all_tests/img/instruction-img/instruction6.jpg" class="slider-img" id="inst6" alt="Slide 6" />
+            <div class="carousel-caption">
+              <p class="slider-text">
+                <b>Mark the spot</b><br />See the top ring? Mark the
+                corresponding spot on the lower<br />ring.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button id="nextbutton" class="button-74 zero" role="button" onclick="toggleAgree()">
+          NEXT STEP
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="myDecision" class="decision">
+    <div class="decision-content">
+      <h1 class="text1">Do you really want to <br />end this check?</h1>
+      <p class="text2">
+        Your check is not completed. By closing this check, <br />all data
+        will be lost.
+      </p>
+      <div class="button-contain">
+        <div>
+          <button class="button-74 first" role="button" onclick="back()">
+            Close
+          </button>
+        </div>
+        <div>
+          <button class="button-74 second" role="button" onclick="openmyModel()">
+            Continue check
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <script src="instruction.js"></script> -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelector(".carousel-inner");
+    function showSlide() {
+      const slideWidth = slides.clientWidth;
+      slides.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+    }
+    function toggleAgree() {
+      const button = document.getElementById("nextbutton");
+      const buttonText = button.innerText;
+      currentSlide = (currentSlide + 1) % slides.children.length;
+      console.log(currentSlide);
+      if (currentSlide == 5) {
+        button.innerText = "I'm ready";
+      }
+      if (currentSlide == 0) {
+        window.location.href = "power-test.html";
+      }
+      showSlide();
+    }
+    function closemyModal() {
+      document.getElementById("myModal").style.display = "none";
+      document.getElementById("myDecision").style.display = "block";
+    }
+    function openmyModel() {
+      document.getElementById("myModal").style.display = "block";
+      document.getElementById("myDecision").style.display = "none";
+    }
+    function back() {
+      window.location.href = "color-blindness-test.html";
+    }
+
+    // scroller
+
+    var rangeInput = document.querySelector(".input-range");
+    var rectangle = document.querySelector(".rectangle");
+
+    rangeInput.addEventListener("input", function () {
+      var scrollPercentage = this.value / this.max;
+      var newHeight =
+        scrollPercentage * document.documentElement.scrollHeight;
+      var newwidth = scrollPercentage * document.documentElement.scrollHeight;
+      rectangle.style.height = newHeight / 3 + "px";
+      rectangle.style.width = newHeight / 1.5 + "px";
+    });
+    window.addEventListener("scroll", function () {
+      var scrollPercentage = rangeInput.value / rangeInput.max;
+      var newHeight =
+        scrollPercentage * document.documentElement.scrollHeight;
+      var newwidth = scrollPercentage * document.documentElement.scrollHeight;
+      rectangle.style.height = newHeight + "px";
+      rectangle.style.width = newHeight + "px";
+    });
+  </script>
+</body>
+
+</html>
