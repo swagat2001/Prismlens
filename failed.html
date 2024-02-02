@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Error - Page Not Found</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .animated-404 {
+            text-align: center;
+        }
+
+        .animated-404 img {
+            max-width: 100%;
+            height: auto;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .animated-404 h1 {
+            color: #333;
+        }
+
+        .animated-404 p {
+            color: #666;
+        }
+
+        .animated-404 a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .animated-404 a:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-404">
+        <img src="error.png" alt="404 Error Illustration">
+        <h1>Oops! Page Not Found</h1>
+        <p>The page you are looking for might be under construction or doesn't exist.</p>
+        <a href="/">Go back to the home page</a>
+    </div>
+
+    <script>
+        // You can add JavaScript code here if needed
+    </script>
+</body>
+</html>
